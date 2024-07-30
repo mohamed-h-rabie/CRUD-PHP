@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+:root {
+  --clouds: #ecf0f1;
+  --plava: #2980b9;
+}
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+}
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #4e085f;
+}
+
+/* start header  */
+.header {
+  padding: 20px 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header__title {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 34px;
+    color: #002765;
+  }
+  .header__cta {
+    .header__cta--button {
+      font-size: 15px;
+      font-weight: bold;
+      color: #002765;
+      background: var(--clouds);
+      padding: 10px 15px;
+      margin-left: 15px;
+      box-shadow: 1px 1px 4px -1px gray;
+      box-shadow: 0px 2px 4px rgba(34, 62, 66, 0.25);
+      transition: all 0.2s ease;
+
+      &:hover {
+        box-shadow: 0px 2px 2px rgba(34, 62, 66, 0.5);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* end header  */
+#search-bar {
+  margin-top: 10px;
+}
+.container {
+  width: 100%;
+  flex: 1;
+  background: linear-gradient(135deg, #153677, #4e085f);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+}
+.todo-app {
+  width: 100%;
+  max-width: 540px;
+  background-color: #fff;
+  padding: 40px 30px 70px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 2rem;
+  margin-top: -40px;
+}
+.app-title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.app-title h2,
+.app-title i {
+  color: #002765;
+}
+.app-title i {
+  font-size: 26px;
+}
+#username {
+  font-weight: 600;
+  font-size: 20px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #edeef0;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 12px;
+  font-size: 17px;
+  padding-left: 20px;
+  border-radius: 50%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 15px 50px;
+  border-radius: 30px;
+  background-color: #ff5945;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.25s ease;
+}
+.btn-add {
+  display: flex;
+  justify-content: center;
+}
+button:hover {
+  filter: brightness(0.8);
+}
+
+ul {
+  list-style: none;
+}
+ul li {
+  font-size: 17px;
+  padding: 12px 8px 12px 50px;
+  margin-top: 5px;
+  cursor: default;
+
+  position: relative;
+}
+ul li h2 {
+  padding: 5px 0px;
+  font-size: 22px;
+  font-family: sans-serif;
+  color: #002765;
+  font-weight: bold;
+}
+ul li p {
+  padding: 5px 0px;
+  color: #002765;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+ul li .check {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  left: 0;
+  top: 35px;
+}
+input[type="checkbox"]:checked + h2,
+input[type="checkbox"]:checked + h2 + p {
+  text-decoration: line-through;
+}
+
+span .delete {
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+
+  cursor: pointer;
+}
+span #edit {
+  margin-right: 5px;
+}
+
+.footerContainer {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px 0;
+  color: #002765;
+  font-size: 20px;
+  font-weight: 600;
+}
+#invalid {
+  display: flex;
+
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+#invalid h2 {
+  color: red;
+  font-size: 14px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination a {
+  margin-right: 15px;
+  color: #002765;
+  font-size: 18px;
+  font-weight: 600;
+}
+.active {
+  background-color: #ff5945;
+  color: white !important;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
