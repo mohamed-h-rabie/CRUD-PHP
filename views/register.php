@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $password)) {
         $passwordErr = "Password must contain at least 8 characters, including lowercase, uppercase, numbers, and special characters.";
     } else {
-        $password = trim(password_hash($password, PASSWORD_BCRYPT));
+        $password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     // Check if the email already exists
@@ -106,9 +106,9 @@ if (isset($_POST['submit'])) {
                 <div class="app-title" id="invalid">
 
                     <?php if (isset($usernameErr)) : ?>
-                    <h2>
-                        *<?php echo $usernameErr; ?>
-                    </h2>
+                        <h2>
+                            *<?php echo $usernameErr; ?>
+                        </h2>
                     <?php endif; ?>
                 </div>
                 <div class="row">
@@ -117,9 +117,9 @@ if (isset($_POST['submit'])) {
                 <div class="app-title" id="invalid">
 
                     <?php if (isset($emailErr)) : ?>
-                    <h2>
-                        *<?php echo $emailErr; ?>
-                    </h2>
+                        <h2>
+                            *<?php echo $emailErr; ?>
+                        </h2>
                     <?php endif; ?>
                 </div>
                 <div class="row">
@@ -128,9 +128,9 @@ if (isset($_POST['submit'])) {
                 <div class="app-title" id="invalid">
 
                     <?php if (isset($passwordErr)) : ?>
-                    <h2>
-                        *<?php echo $passwordErr; ?>
-                    </h2>
+                        <h2>
+                            *<?php echo $passwordErr; ?>
+                        </h2>
                     <?php endif; ?>
                 </div>
                 <div class="btn-add">

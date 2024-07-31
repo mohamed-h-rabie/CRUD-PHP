@@ -113,6 +113,10 @@ a {
 .app-title i {
   font-size: 26px;
 }
+#empty-todo {
+  text-transform: uppercase;
+  color: #002765;
+}
 #username {
   font-weight: 600;
   font-size: 20px;
@@ -187,10 +191,6 @@ ul li .check {
   left: 0;
   top: 35px;
 }
-input[type="checkbox"]:checked + h2,
-input[type="checkbox"]:checked + h2 + p {
-  text-decoration: line-through;
-}
 
 span .delete {
   position: absolute;
@@ -246,4 +246,8 @@ span #edit {
   border-radius: 50%;
   display: flex;
   justify-content: center;
+}
+.completed {
+  text-decoration: line-through;
+  color: grey;
 }
