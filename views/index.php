@@ -2,9 +2,11 @@
     session_start();
     include("../config/DB.php");
 
+    // Cross-Site Request Forgery 
     // Generate a CSRF token if one isn't already present
+
     if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
     }
 
     // Store the CSRF token in a variable to use it in the form
@@ -20,7 +22,7 @@
 
     // Pagination variables
     $limit = 2;
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $offset = ($page - 1) * $limit;
 
     // Fetching data from database with pagination
@@ -31,7 +33,9 @@
     // Total number of items
     $total_sql = "SELECT COUNT(*) from todolist WHERE user_id = $user_id";
     $total_result = mysqli_query($conn, $total_sql);
+
     $total_row = mysqli_fetch_row($total_result);
+
     $total_items = $total_row[0] ?? 0;
     $total_pages = ceil($total_items / $limit);
 
@@ -135,38 +139,36 @@
                     </div>
                 </form>
                 <?php if (empty($list)) : ?>
-                <h1 id="empty-todo">Add your list for today</h1>
+                    <h1 id="empty-todo">Add your list for today</h1>
                 <?php endif; ?>
                 <ul id="list-container">
                     <?php foreach ($list as $item) : ?>
-                    <li class="<?php echo $item['completed'] ? 'completed' : ''; ?>">
-                        <form action="" method="POST">
-                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?>">
-                            <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
-                            <input type="checkbox" class="check" name="completed"
-                                <?php echo $item['completed'] ? 'checked' : ''; ?> onchange="this.form.submit()">
-                            <input type="hidden" name="complete">
+                        <li class="<?php echo $item['completed'] ? 'completed' : ''; ?>">
+                            <form action="" method="POST">
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?>">
+                                <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                                <input type="checkbox" class="check" name="completed" <?php echo $item['completed'] ? 'checked' : ''; ?> onchange="this.form.submit()">
+                                <input type="hidden" name="complete">
 
 
-                        </form>
-                        <h2><?php echo $item['title']; ?></h2>
-                        <p><?php echo $item['body']; ?></p>
-                        <form method="POST" action="">
-                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                            <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
-                            <span>
-                                <button name="delete" type="submit" class="delete">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </span>
-                        </form>
-                    </li>
+                            </form>
+                            <h2><?php echo $item['title']; ?></h2>
+                            <p><?php echo $item['body']; ?></p>
+                            <form method="POST" action="">
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+                                <span>
+                                    <button name="delete" type="submit" class="delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </span>
+                            </form>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
                 <div class="pagination">
                     <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                    <a href="?page=<?php echo $i; ?>"
-                        <?php if ($i == $page) echo 'class="active"'; ?>><?php echo $i; ?></a>
+                        <a href="?page=<?php echo $i; ?>" <?php if ($i == $page) echo 'class="active"'; ?>><?php echo $i; ?></a>
                     <?php endfor; ?>
                 </div>
 

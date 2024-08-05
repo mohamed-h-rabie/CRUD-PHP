@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
         die('Invalid CSRF token');
     }
 
-    $password = $_POST['password'];
+
 
     // Validate username
     if (empty($_POST['username'])) {
@@ -45,8 +45,9 @@ if (isset($_POST['submit'])) {
 
     // Validate password
     if (empty($_POST['password'])) {
+
         $passwordErr = 'Password is required';
-    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $password)) {
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $_POST['password'])) {
         $passwordErr = "Password must contain at least 8 characters, including lowercase, uppercase, numbers, and special characters.";
     } else {
         $password = password_hash($password, PASSWORD_BCRYPT);
